@@ -25,10 +25,11 @@ LIBRARY_APPS = [
     'debug_toolbar',
     'drf_yasg',
     'corsheaders',
+    'django_summernote',
 ]
 
 LOCAL_APPS = [
-
+    'apps.announcement.apps.AnnouncementConfig',
 ]
 
 INSTALLED_APPS = [
@@ -91,6 +92,19 @@ MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'back_media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    'DATETIME_FORMAT': "%d.%m.%Y",
+    'DATE_FORMAT': "%d.%m.%Y",
+}
+
+SUMMERNOTE_CONFIG = {
+    'iframe': True,
+    'summernote': {
+        'width': '600',
+        'height': '500',
+    },
+}
 
 if not PRODUCTION:
     from .development import *
