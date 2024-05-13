@@ -30,6 +30,7 @@ LIBRARY_APPS = [
 
 LOCAL_APPS = [
     'apps.announcement.apps.AnnouncementConfig',
+    'apps.center_info.apps.CenterInfoConfig',
 ]
 
 INSTALLED_APPS = [
