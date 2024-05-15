@@ -1,14 +1,13 @@
-from rest_framework.generics import ListAPIView, RetrieveAPIView
+from rest_framework.generics import ListAPIView
 
 from apps.center_info.models import DirectorSpeech, CenterHistory, CenterActivity
 from apps.center_info.serializers import DirectorSpeachSerializer, CenterHistorySerializer, CenterActivitySerializer
+from apps.common.views import LatestObjectRetrieveAPIView
 
 
-class DirectorSpeechRetrieveAPIView(RetrieveAPIView):
+class DirectorSpeechRetrieveAPIView(LatestObjectRetrieveAPIView):
+    model = DirectorSpeech
     serializer_class = DirectorSpeachSerializer
-
-    def get_object(self):
-        return DirectorSpeech.objects.latest('id')
 
 
 class CenterHistoryListAPIView(ListAPIView):

@@ -29,8 +29,10 @@ LIBRARY_APPS = [
 ]
 
 LOCAL_APPS = [
+    'apps.common.apps.CommonConfig',
     'apps.announcement.apps.AnnouncementConfig',
     'apps.center_info.apps.CenterInfoConfig',
+    'apps.center_courses.apps.CenterCoursesConfig',
 ]
 
 INSTALLED_APPS = [
