@@ -33,6 +33,7 @@ LOCAL_APPS = [
     'apps.announcement.apps.AnnouncementConfig',
     'apps.center_info.apps.CenterInfoConfig',
     'apps.center_courses.apps.CenterCoursesConfig',
+    'apps.korean_edu.apps.KoreanEduConfig',
 ]
 
 INSTALLED_APPS = [

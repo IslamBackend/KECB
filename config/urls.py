@@ -10,6 +10,7 @@ urlpatterns = [
     path('api/v1/', include('apps.announcement.urls')),
     path('api/v1/', include('apps.center_info.urls')),
     path('api/v1/', include('apps.center_courses.urls')),
+    path('api/v1/', include('apps.korean_edu.urls')),
     path('summernote/', include('django_summernote.urls')),
 ]
 
