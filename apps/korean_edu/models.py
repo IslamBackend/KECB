@@ -22,8 +22,8 @@ class UniversityInfo(models.Model):
 
 class RecruitmentAnnouncement(models.Model):
     title = models.CharField(max_length=100, verbose_name='Название')
-    description = models.TextField(verbose_name='Описание')
-    video = models.URLField(max_length=255, verbose_name='Видео')
+    description = models.TextField(null=True, blank=True, verbose_name='Описание')
+    video = models.URLField(null=True, blank=True, verbose_name='Видео')
     created_at = models.DateField(auto_now_add=True)
 
     def __str__(self):
@@ -37,7 +37,7 @@ class RecruitmentAnnouncement(models.Model):
 
 class RecruitmentAnnouncementFile(models.Model):
     title = models.CharField(max_length=100, verbose_name='Название')
-    file_path = models.FileField(upload_to='recruitment_file', max_length=255, verbose_name='Путь к файлу')
+    link = models.FileField(upload_to='recruitment_file', max_length=255, verbose_name='Путь к файлу')
     recruitment_announcement = models.ForeignKey(
         RecruitmentAnnouncement,
         on_delete=models.CASCADE,

@@ -1,5 +1,6 @@
 from django.db import models
 
+from apps.announcement.models import Rubric
 from apps.center_info.constants import ACTIVITY_CHOICES
 
 
@@ -17,8 +18,8 @@ class DirectorSpeech(models.Model):
 
 
 class CenterHistory(models.Model):
-    title = models.CharField(max_length=100, verbose_name='Заголовок')
-    description = models.TextField(verbose_name='Описание')
+    title = models.CharField(max_length=100, verbose_name='Название')
+    description = models.TextField(null=True, blank=True, verbose_name='Описание')
     image = models.ImageField(upload_to='center_history/', verbose_name='Изображение')
     date = models.DateField(verbose_name='Дата')
 
@@ -28,7 +29,7 @@ class CenterHistory(models.Model):
     class Meta:
         verbose_name = 'История и основная информация центра'
         verbose_name_plural = 'Истории и основная информация центра'
-        ordering = ['-date']
+        ordering = ('-date',)
         db_table = 'center_history'
 
 
@@ -41,7 +42,7 @@ class CenterActivity(models.Model):
         verbose_name='Тип деятельности'
     )
     description = models.TextField(verbose_name='Описание')
-    video = models.URLField(verbose_name='Видео')
+    video = models.URLField(null=True, blank=True, verbose_name='Видео')
 
     def __str__(self):
         return self.title
@@ -67,3 +68,20 @@ class CenterActivityImage(models.Model):
         verbose_name_plural = 'Изображения'
         db_table = 'center_activity_image'
 
+
+class QuestionAnswer(models.Model):
+    question = models.CharField(max_length=100, verbose_name='Вопрос')
+    answer = models.CharField(max_length=255, verbose_name='Ответ')
+    rubric = models.ForeignKey(
+        Rubric,
+        related_name='faq',
+        on_delete=models.CASCADE,
+        verbose_name='Рубрика')
+
+    def __str__(self):
+        return self.question[:30]
+
+    class Meta:
+        verbose_name = 'Вопрос и ответ'
+        verbose_name_plural = 'Вопросы и ответы'
+        db_table = 'faq'

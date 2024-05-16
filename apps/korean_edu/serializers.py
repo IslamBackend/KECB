@@ -18,7 +18,7 @@ class RecruitmentAnnouncementSerializer(serializers.ModelSerializer):
 class RecruitmentAnnouncementFileSerializer(serializers.ModelSerializer):
     class Meta:
         model = RecruitmentAnnouncementFile
-        fields = ('id', 'title', 'file_path')
+        fields = ('id', 'title', 'link')
 
 
 class RecruitmentAnnouncementDetailSerializer(serializers.ModelSerializer):

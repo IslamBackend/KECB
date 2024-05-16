@@ -2,8 +2,8 @@ from django.db import models
 
 
 class BaseInfo(models.Model):
-    title = models.CharField(max_length=100, verbose_name='Заголовок')
-    description = models.TextField(verbose_name='Описание')
+    title = models.CharField(max_length=125, verbose_name='Заголовок')
+    description = models.TextField(null=True, blank=True, verbose_name='Описание')
     video = models.URLField(null=True, blank=True, verbose_name='Видео')
 
     class Meta:
@@ -70,5 +70,5 @@ class LessonMaterial(models.Model):
     class Meta:
         verbose_name = 'Материал для урока'
         verbose_name_plural = 'Материалы для уроков'
-        ordering = ['-id']
+        ordering = ('-id',)
         db_table = 'lesson_material'

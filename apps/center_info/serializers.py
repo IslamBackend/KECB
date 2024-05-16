@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from apps.center_info.models import DirectorSpeech, CenterHistory, CenterActivity, CenterActivityImage
+from apps.center_info.models import DirectorSpeech, CenterHistory, CenterActivity, CenterActivityImage, QuestionAnswer
 
 
 class DirectorSpeachSerializer(serializers.ModelSerializer):
@@ -27,3 +27,11 @@ class CenterActivitySerializer(serializers.ModelSerializer):
     class Meta:
         model = CenterActivity
         fields = ('id', 'title', 'description', 'video', 'center_activity_images')
+
+
+class QuestionAnswerSerializer(serializers.ModelSerializer):
+    rubric = serializers.StringRelatedField()
+
+    class Meta:
+        model = QuestionAnswer
+        fields = ('id', 'rubric', 'question', 'answer')

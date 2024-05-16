@@ -2,7 +2,7 @@ from django.contrib import admin
 
 from django_summernote import admin as sadmin
 
-from apps.center_info.models import DirectorSpeech, CenterHistory, CenterActivityImage, CenterActivity
+from apps.center_info.models import DirectorSpeech, CenterHistory, CenterActivityImage, CenterActivity, QuestionAnswer
 
 
 @admin.register(DirectorSpeech)
@@ -33,3 +33,9 @@ class CenterActivityAdmin(sadmin.SummernoteModelAdmin):
     summernote_fields = ('description',)
     search_fields = ('title', 'description')
     inlines = [CenterActivityImageAdmin, ]
+
+
+@admin.register(QuestionAnswer)
+class CenterActivityAdmin(admin.ModelAdmin):
+    list_display = ('question',)
+    search_fields = ('question',)

@@ -34,6 +34,7 @@ LOCAL_APPS = [
     'apps.center_info.apps.CenterInfoConfig',
     'apps.center_courses.apps.CenterCoursesConfig',
     'apps.korean_edu.apps.KoreanEduConfig',
+    'apps.library.apps.LibraryConfig',
 ]
 
 INSTALLED_APPS = [

@@ -1,6 +1,6 @@
 from django.db import models
 
-from apps.announcement.constants import RUBRIC_CHOICES
+from apps.common.constants import RUBRIC_CHOICES
 
 
 class Rubric(models.Model):
@@ -28,12 +28,12 @@ class Announcement(models.Model):
     class Meta:
         verbose_name = 'Объявление'
         verbose_name_plural = 'Объявления'
-        ordering = ['-created_at']
+        ordering = ('-created_at',)
         db_table = 'announcement'
 
 
 class AnnouncementFile(models.Model):
-    title = models.CharField(max_length=125, verbose_name='Название файла')
+    title = models.CharField(max_length=125, verbose_name='Заголовок')
     file_path = models.FileField(upload_to='announcement_files', max_length=255, verbose_name='Путь к файлу')
     announcement = models.ForeignKey(
         Announcement,
