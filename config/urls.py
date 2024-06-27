@@ -7,11 +7,13 @@ from config.settings.swagger import swagger_urlpatterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("i18n/", include("django.conf.urls.i18n")),
     path('api/v1/', include('apps.announcement.urls')),
     path('api/v1/', include('apps.center_info.urls')),
     path('api/v1/', include('apps.center_courses.urls')),
     path('api/v1/', include('apps.korean_edu.urls')),
     path('api/v1/', include('apps.library.urls')),
+    path('api/v1/', include('apps.home.urls')),
     path('summernote/', include('django_summernote.urls')),
 ]
 

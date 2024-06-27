@@ -4,6 +4,11 @@ from rest_framework.response import Response
 
 from apps.library.models import Gallery, EducationalMaterial
 from apps.library.serializers import GallerySerializer, GalleryDetailSerializer, EducationalMaterialSerializer
+from apps.common.views import LatestBannerRetrieveAPIView
+
+
+class LibraryBannerRetrieveAPIView(LatestBannerRetrieveAPIView):
+    page = 'Библиотека данных'
 
 
 class GalleryListView(APIView):

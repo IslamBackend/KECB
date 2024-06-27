@@ -3,6 +3,11 @@ from rest_framework.generics import ListAPIView, RetrieveAPIView
 from apps.announcement.models import Announcement
 from apps.announcement.pagination import CustomPagination
 from apps.announcement.serializers import AnnouncementSerializer, AnnouncementDetailSerializer
+from apps.common.views import LatestBannerRetrieveAPIView
+
+
+class AnnouncementBannerRetrieveAPIView(LatestBannerRetrieveAPIView):
+    page = 'Объявления'
 
 
 class AnnouncementListAPIView(ListAPIView):

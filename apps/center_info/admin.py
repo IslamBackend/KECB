@@ -1,14 +1,15 @@
 from django.contrib import admin
 
 from django_summernote import admin as sadmin
+from modeltranslation.admin import TranslationAdmin
 
 from apps.center_info.models import DirectorSpeech, CenterHistory, CenterActivityImage, CenterActivity, QuestionAnswer
 
 
 @admin.register(DirectorSpeech)
-class DirectorSpeechAdmin(sadmin.SummernoteModelAdmin):
-    list_display = ('text',)
-    summernote_fields = ('text',)
+class DirectorSpeechAdmin(sadmin.SummernoteModelAdmin, TranslationAdmin):
+    list_display = ('text_ru', 'text_ko')
+    summernote_fields = ('text_ru', 'text_ko')
 
     def has_add_permission(self, request):
         return not DirectorSpeech.objects.exists()
@@ -18,9 +19,9 @@ class DirectorSpeechAdmin(sadmin.SummernoteModelAdmin):
 
 
 @admin.register(CenterHistory)
-class CenterHistoryAdmin(sadmin.SummernoteModelAdmin):
-    list_display = ('title',)
-    search_fields = ('title', 'description')
+class CenterHistoryAdmin(sadmin.SummernoteModelAdmin, TranslationAdmin):
+    list_display = ('title_ru', 'title_ko')
+    search_fields = ('title_ru', 'title_ko')
 
 
 class CenterActivityImageAdmin(admin.TabularInline):
@@ -28,14 +29,14 @@ class CenterActivityImageAdmin(admin.TabularInline):
 
 
 @admin.register(CenterActivity)
-class CenterActivityAdmin(sadmin.SummernoteModelAdmin):
-    list_display = ('title', 'activity_type')
-    summernote_fields = ('description',)
-    search_fields = ('title', 'description')
+class CenterActivityAdmin(sadmin.SummernoteModelAdmin, TranslationAdmin):
+    list_display = ('title_ru', 'title_ko')
+    summernote_fields = ('description_ru', 'description_ko')
+    search_fields = ('title_ru', 'description_ru')
     inlines = [CenterActivityImageAdmin, ]
 
 
 @admin.register(QuestionAnswer)
-class CenterActivityAdmin(admin.ModelAdmin):
-    list_display = ('question',)
-    search_fields = ('question',)
+class CenterActivityAdmin(TranslationAdmin):
+    list_display = ('question_ru', 'question_ko',)
+    search_fields = ('question_ru', 'question_ko')

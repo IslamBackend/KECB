@@ -2,7 +2,11 @@ from rest_framework.generics import ListAPIView
 
 from apps.center_courses.models import CenterCourseInfo, LessonInfo, LessonMaterial
 from apps.center_courses.serializers import CenterCourseInfoSerializer, LessonInfoSerializer, LessonMaterialSerializer
-from apps.common.views import LatestObjectRetrieveAPIView
+from apps.common.views import LatestObjectRetrieveAPIView, LatestBannerRetrieveAPIView
+
+
+class CenterCourseBannerRetrieveAPIView(LatestBannerRetrieveAPIView):
+    page = 'Курсы центра'
 
 
 class CenterCourseInfoLatestObjectRetrieveAPIView(LatestObjectRetrieveAPIView):

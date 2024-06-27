@@ -1,6 +1,7 @@
 import os
 
 from pathlib import Path
+from django.utils.translation import gettext_lazy as _
 from .jazzmin import *
 
 from .env_reader import env
@@ -18,7 +19,10 @@ DJANGO_APPS = [
     'django.contrib.staticfiles',
 ]
 
-THEME_APPS = ['jazzmin']
+THEME_APPS = [
+    "modeltranslation",
+    'jazzmin'
+]
 
 LIBRARY_APPS = [
     'rest_framework',
@@ -35,6 +39,7 @@ LOCAL_APPS = [
     'apps.center_courses.apps.CenterCoursesConfig',
     'apps.korean_edu.apps.KoreanEduConfig',
     'apps.library.apps.LibraryConfig',
+    'apps.home.apps.HomeConfig',
 ]
 
 INSTALLED_APPS = [
@@ -47,6 +52,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "django.middleware.locale.LocaleMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -85,6 +91,17 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'Asia/Bishkek'
+
+gettext = lambda s: s
+
+LANGUAGES = [
+    ("ru", _("Русский")),
+    ("ko", _("Korean")),
+]
+
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'center_info/locale'),
+]
 
 USE_I18N = True
 

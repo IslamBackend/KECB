@@ -1,4 +1,5 @@
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 
 from apps.library.models import Gallery, GalleryImage, EducationalMaterial
 
@@ -8,13 +9,13 @@ class GalleryImageAdmin(admin.TabularInline):
 
 
 @admin.register(Gallery)
-class GalleryAdmin(admin.ModelAdmin):
-    list_display = ('title', 'rubric', 'created_at')
-    search_fields = ('title', 'description')
+class GalleryAdmin(TranslationAdmin):
+    list_display = ('title_ru', 'title_ko', 'created_at')
+    search_fields = ('title_ru', 'title_ko', 'description')
     inlines = [GalleryImageAdmin]
 
 
 @admin.register(EducationalMaterial)
-class EducationalMaterialAdmin(admin.ModelAdmin):
-    list_display = ('title', 'link')
-    search_fields = ('title',)
+class EducationalMaterialAdmin(TranslationAdmin):
+    list_display = ('title_ru', 'title_ko', 'link')
+    search_fields = ('title_ru', 'title_ko')

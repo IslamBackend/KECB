@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django_summernote import admin as sadmin
+from modeltranslation.admin import TranslationAdmin
 
 from apps.center_courses.models import CenterCourseInfo, CenterCourseInfoImage, LessonInfo, LessonInfoImage, \
     LessonMaterial
@@ -21,19 +22,19 @@ class LessonInfoImageAdmin(BaseInlineAdmin):
 
 
 @admin.register(CenterCourseInfo)
-class CenterCourseInfoAdmin(sadmin.SummernoteModelAdmin):
-    list_display = ('title',)
-    summernote_fields = ('description',)
+class CenterCourseInfoAdmin(sadmin.SummernoteModelAdmin, TranslationAdmin):
+    list_display = ('title_ru',)
+    summernote_fields = ('description_ru', 'description_ko')
     inlines = [CenterCourseInfoImageAdmin, ]
 
 
 @admin.register(LessonInfo)
-class LessonInfoAdmin(sadmin.SummernoteModelAdmin):
-    list_display = ('title',)
-    summernote_fields = ('description',)
+class LessonInfoAdmin(sadmin.SummernoteModelAdmin, TranslationAdmin):
+    list_display = ('title_ru',)
+    summernote_fields = ('description_ru', 'description_ko')
     inlines = [LessonInfoImageAdmin, ]
 
 
 @admin.register(LessonMaterial)
-class LessonMaterialAdmin(sadmin.SummernoteModelAdmin):
-    list_display = ('title', 'file_path')
+class LessonMaterialAdmin(sadmin.SummernoteModelAdmin, TranslationAdmin):
+    list_display = ('title_ru', 'file_path')

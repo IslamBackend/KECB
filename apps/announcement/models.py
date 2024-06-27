@@ -1,13 +1,11 @@
 from django.db import models
 
-from apps.common.constants import RUBRIC_CHOICES
-
 
 class Rubric(models.Model):
-    title = models.CharField(max_length=50, choices=RUBRIC_CHOICES, unique=True)
+    title = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.get_title_display()
+        return self.title
 
     class Meta:
         verbose_name = 'Рубрика'
