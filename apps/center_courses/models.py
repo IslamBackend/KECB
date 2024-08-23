@@ -1,63 +1,40 @@
 from django.db import models
 
 
-class BaseInfo(models.Model):
+class CourseOrLessonInfo(models.Model):
+    TITLE_CHOICES = [
+        ('course', 'Информация о курсе центра'),
+        ('lesson', 'Информация о занятии'),
+    ]
+
     title = models.CharField(max_length=125, verbose_name='Заголовок')
     description = models.TextField(null=True, blank=True, verbose_name='Описание')
     video = models.URLField(null=True, blank=True, verbose_name='Видео')
+    type = models.CharField(max_length=10, choices=TITLE_CHOICES, verbose_name='Тип')
 
-    class Meta:
-        abstract = True
-
-
-class CenterCourseInfo(BaseInfo):
     def __str__(self):
-        return self.title
+        type_display = dict(self.TITLE_CHOICES).get(self.type)
+        return f"{self.title} ({type_display})"
 
     class Meta:
-        verbose_name = 'Информация о курсе центра'
-        verbose_name_plural = 'Информация о курсах центра'
-        db_table = 'center_course_info'
+        verbose_name = 'Информация'
+        verbose_name_plural = 'Информация'
+        db_table = 'course_or_lesson_info'
 
 
-class CenterCourseInfoImage(models.Model):
-    image = models.ImageField(upload_to='course_image', verbose_name='Изображение')
-    course_info = models.ForeignKey(
-        CenterCourseInfo,
+class CourseOrLessonImage(models.Model):
+    image = models.ImageField(upload_to='info_images', verbose_name='Изображение')
+    info = models.ForeignKey(
+        CourseOrLessonInfo,
         on_delete=models.CASCADE,
-        related_name='course_images',
-        verbose_name='Курс центра'
+        related_name='images',
+        verbose_name='Информация'
     )
 
     class Meta:
-        verbose_name = 'Изображение курса центра'
-        verbose_name_plural = 'Изображения курсов центра'
-        db_table = 'center_course_info_image'
-
-
-class LessonInfo(BaseInfo):
-    def __str__(self):
-        return self.title
-
-    class Meta:
-        verbose_name = 'Информация о занятии'
-        verbose_name_plural = 'Информация о занятиях'
-        db_table = 'lesson_info'
-
-
-class LessonInfoImage(models.Model):
-    image = models.ImageField(upload_to='lesson_image', verbose_name='Изображение')
-    lesson_info = models.ForeignKey(
-        LessonInfo,
-        on_delete=models.CASCADE,
-        related_name='lesson_images',
-        verbose_name='Информация о занятии'
-    )
-
-    class Meta:
-        verbose_name = 'Изображение занятия'
-        verbose_name_plural = 'Изображения занятий'
-        db_table = 'lesson_info_image'
+        verbose_name = 'Изображение'
+        verbose_name_plural = 'Изображения'
+        db_table = 'course_or_lesson_info_image'
 
 
 class LessonMaterial(models.Model):

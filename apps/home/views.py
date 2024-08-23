@@ -1,4 +1,6 @@
+from django.db.models import Q
 from rest_framework.generics import ListAPIView
+from rest_framework.response import Response
 
 from apps.announcement.models import Announcement
 from apps.announcement.serializers import AnnouncementSerializer
@@ -35,3 +37,28 @@ class SocialInfoLatestObjectRetrieveAPIView(LatestObjectRetrieveAPIView):
 class KoreanSiteListAPIView(ListAPIView):
     queryset = KoreanSite.objects.all()
     serializer_class = KoreanSiteSerializer
+
+
+class SearchListAPIView(ListAPIView):
+    def get(self, request, *args, **kwargs):
+        q = request.query_params.get('q', '')
+        results = {
+            'announcements': [],
+            'galleries': []
+        }
+
+        if q:
+            announcement_results = Announcement.objects.filter(
+                Q(title__icontains=q) |
+                Q(description__icontains=q)
+            ).values('id', 'title')
+
+            gallery_results = Gallery.objects.filter(
+                Q(title__icontains=q) |
+                Q(description__icontains=q)
+            ).values('id', 'title')
+
+            results['announcements'] = list(announcement_results)
+            results['galleries'] = list(gallery_results)
+
+        return Response(results)

@@ -1,15 +1,10 @@
 from modeltranslation.translator import register, TranslationOptions
 
-from apps.center_courses.models import CenterCourseInfo, LessonInfo, LessonMaterial
+from apps.center_courses.models import CourseOrLessonInfo, LessonMaterial
 
 
-@register(CenterCourseInfo)
+@register(CourseOrLessonInfo)
 class BaseInfoTranslationOptions(TranslationOptions):
-    fields = ('title', 'description')
-
-
-@register(LessonInfo)
-class LessonInfoTranslationOptions(TranslationOptions):
     fields = ('title', 'description')
 
 

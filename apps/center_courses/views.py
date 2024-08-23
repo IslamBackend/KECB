@@ -1,7 +1,7 @@
 from rest_framework.generics import ListAPIView
 
-from apps.center_courses.models import CenterCourseInfo, LessonInfo, LessonMaterial
-from apps.center_courses.serializers import CenterCourseInfoSerializer, LessonInfoSerializer, LessonMaterialSerializer
+from apps.center_courses.models import CourseOrLessonInfo, LessonMaterial
+from apps.center_courses.serializers import CourseOrLessonInfoSerializer, LessonMaterialSerializer
 from apps.common.views import LatestObjectRetrieveAPIView, LatestBannerRetrieveAPIView
 
 
@@ -10,13 +10,15 @@ class CenterCourseBannerRetrieveAPIView(LatestBannerRetrieveAPIView):
 
 
 class CenterCourseInfoLatestObjectRetrieveAPIView(LatestObjectRetrieveAPIView):
-    model = CenterCourseInfo
-    serializer_class = CenterCourseInfoSerializer
+    model = CourseOrLessonInfo
+    serializer_class = CourseOrLessonInfoSerializer
+    type = 'course'
 
 
 class LessonInfoLatestObjectRetrieveAPIView(LatestObjectRetrieveAPIView):
-    model = LessonInfo
-    serializer_class = LessonInfoSerializer
+    model = CourseOrLessonInfo
+    serializer_class = CourseOrLessonInfoSerializer
+    type = 'lesson'
 
 
 class LessonMaterialListAPIView(ListAPIView):

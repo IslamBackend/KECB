@@ -2,8 +2,7 @@ from django.contrib import admin
 from django_summernote import admin as sadmin
 from modeltranslation.admin import TranslationAdmin
 
-from apps.center_courses.models import CenterCourseInfo, CenterCourseInfoImage, LessonInfo, LessonInfoImage, \
-    LessonMaterial
+from apps.center_courses.models import CourseOrLessonInfo, CourseOrLessonImage, LessonMaterial
 
 
 class BaseInlineAdmin(admin.TabularInline):
@@ -13,26 +12,14 @@ class BaseInlineAdmin(admin.TabularInline):
     show_change_link = True
 
 
-class CenterCourseInfoImageAdmin(BaseInlineAdmin):
-    model = CenterCourseInfoImage
+class CourseOrLessonImageAdmin(BaseInlineAdmin):
+    model = CourseOrLessonImage
 
 
-class LessonInfoImageAdmin(BaseInlineAdmin):
-    model = LessonInfoImage
-
-
-@admin.register(CenterCourseInfo)
+@admin.register(CourseOrLessonInfo)
 class CenterCourseInfoAdmin(sadmin.SummernoteModelAdmin, TranslationAdmin):
-    list_display = ('title_ru',)
     summernote_fields = ('description_ru', 'description_ko')
-    inlines = [CenterCourseInfoImageAdmin, ]
-
-
-@admin.register(LessonInfo)
-class LessonInfoAdmin(sadmin.SummernoteModelAdmin, TranslationAdmin):
-    list_display = ('title_ru',)
-    summernote_fields = ('description_ru', 'description_ko')
-    inlines = [LessonInfoImageAdmin, ]
+    inlines = [CourseOrLessonImageAdmin, ]
 
 
 @admin.register(LessonMaterial)

@@ -1,35 +1,20 @@
 from rest_framework import serializers
 
-from apps.center_courses.models import CenterCourseInfo, CenterCourseInfoImage, LessonInfo, LessonInfoImage, \
-    LessonMaterial
+from apps.center_courses.models import CourseOrLessonInfo, CourseOrLessonImage, LessonMaterial
 
 
-class CenterCourseInfoImageSerializer(serializers.ModelSerializer):
+class CourseOrLessonImageSerializer(serializers.ModelSerializer):
     class Meta:
-        model = CenterCourseInfoImage
+        model = CourseOrLessonImage
         fields = ('id', 'image')
 
 
-class CenterCourseInfoSerializer(serializers.ModelSerializer):
-    course_images = CenterCourseInfoImageSerializer(many=True)
+class CourseOrLessonInfoSerializer(serializers.ModelSerializer):
+    images = CourseOrLessonImageSerializer(many=True)
 
     class Meta:
-        model = CenterCourseInfo
-        fields = ('id', 'title', 'description', 'video', 'course_images')
-
-
-class LessonInfoImageSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = LessonInfoImage
-        fields = ('id', 'image')
-
-
-class LessonInfoSerializer(serializers.ModelSerializer):
-    lesson_images = LessonInfoImageSerializer(many=True)
-
-    class Meta:
-        model = LessonInfo
-        fields = ('id', 'title', 'description', 'video', 'lesson_images')
+        model = CourseOrLessonInfo
+        fields = ('id', 'title', 'description', 'video', 'type', 'images')
 
 
 class LessonMaterialSerializer(serializers.ModelSerializer):

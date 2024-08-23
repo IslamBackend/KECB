@@ -10,10 +10,14 @@ class LatestObjectRetrieveAPIView(RetrieveAPIView):
     model = None
     serializer_class = None
     lookup_field = 'id'
+    type = None
 
     def get_object(self):
-        try:
+        if self.type is None:
             return self.model.objects.latest('id')
+
+        try:
+            return self.model.objects.filter(type=self.type).latest('id')
         except self.model.DoesNotExist:
             raise Http404(f"No {self.model.__name__} objects found")
 

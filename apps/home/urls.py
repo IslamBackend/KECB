@@ -1,9 +1,10 @@
 from django.urls import path
 
 from apps.home.views import HomeBannerRetrieveAPIView, HomeAnnouncementListAPIView, HomeGalleryListAPIView, \
-    SocialInfoLatestObjectRetrieveAPIView, KoreanSiteListAPIView
+    SocialInfoLatestObjectRetrieveAPIView, KoreanSiteListAPIView, SearchListAPIView
 
 urlpatterns = [
+    path('search/', SearchListAPIView.as_view(), name='search'),
     path('social-info/', SocialInfoLatestObjectRetrieveAPIView.as_view(), name='social_info'),
     path('home/banner/', HomeBannerRetrieveAPIView.as_view(), name='home_banner'),
     path('home/announcement/', HomeAnnouncementListAPIView.as_view(), name='home_announcement'),
