@@ -6,7 +6,7 @@ from apps.korean_edu.models import UniversityInfo, RecruitmentAnnouncement, Recr
 class UniversityInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = UniversityInfo
-        fields = ('id', 'title', 'type', 'address', 'founding_year', 'website')
+        fields = ('id', 'title', 'image', 'type', 'address', 'founding_year', 'website')
 
 
 class RecruitmentAnnouncementSerializer(serializers.ModelSerializer):
@@ -26,4 +26,4 @@ class RecruitmentAnnouncementDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = RecruitmentAnnouncement
-        fields = ('id', 'title', 'description', 'created_at', 'recruitment_file')
+        fields = ('id', 'title', 'description', 'video', 'created_at', 'recruitment_file')
