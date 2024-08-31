@@ -26,7 +26,6 @@ THEME_APPS = [
 
 LIBRARY_APPS = [
     'rest_framework',
-    'debug_toolbar',
     'drf_yasg',
     'corsheaders',
     'django_summernote',
@@ -107,10 +106,10 @@ USE_I18N = True
 
 USE_TZ = True
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'back_static')
 
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'back_media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -135,4 +134,5 @@ else:
 
 if DEBUG:
     INTERNAL_IPS = ['127.0.0.1']
+    INSTALLED_APPS += ['debug_toolbar']
     MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware']
